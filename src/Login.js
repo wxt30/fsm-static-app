@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:3000/login', { username, password });
             localStorage.setItem('token', response.data.accessToken);
-            history.push('/jobs');
+            navigate.push('/jobs');
         } catch (error) {
             console.error('Error logging in:', error);
         }
